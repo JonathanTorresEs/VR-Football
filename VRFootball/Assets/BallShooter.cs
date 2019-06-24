@@ -18,6 +18,8 @@ public class BallShooter : MonoBehaviour {
     private GameObject hand;
     private bool heldInHand = false;
 
+    // Controller variables
+    private Valve.VR.EVRButtonId trigger = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
 
 
     // Use this for initialization
