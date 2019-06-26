@@ -9,6 +9,8 @@ public class BallShooter : MonoBehaviour {
     // Launch at target variables
     public float initialAngle = 0.0f;
     public GameObject ballTarget;
+    public bool missedShot = false;
+    public bool scoreOnce = false;
 
     public Rigidbody ballRigidbody;
 
@@ -79,7 +81,7 @@ public class BallShooter : MonoBehaviour {
     // disable its gravity and attach to hand
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "hand_right" || other.gameObject.name == "Controller (right)")
+        if((other.gameObject.name == "hand_right" || other.gameObject.name == "Controller (right)") && !missedShot)
         {
             ballRigidbody.useGravity = false;
             ballRigidbody.velocity = Vector3.zero;
@@ -87,13 +89,28 @@ public class BallShooter : MonoBehaviour {
 
             heldInHand = true;
             hand = other.gameObject;
-            ballManager.ballScore++;
 
-             foreach(Image image in arrows)
+            if(!scoreOnce)
+            {
+                ballManager.ballScore++;
+                scoreOnce = true;
+            }
+
+            foreach (Image image in arrows)
             {
                 image.enabled = false;
             }
         }
+
+        if (other.gameObject.tag == "BallTarget" && !heldInHand)
+        {
+            missedShot = true;
+            foreach (Image image in arrows)
+            {
+                image.enabled = false;
+            }
+        }
+        
     }
 
 
