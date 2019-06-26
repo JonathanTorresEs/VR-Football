@@ -6,45 +6,39 @@ using UnityEngine.UI;
 
 public class BallShooter : MonoBehaviour {
 
-    // Launch variables
+    // Launch at target variables
     public float initialAngle = 0.0f;
-    public GameObject target;
-    private Rigidbody rigid;
+    public GameObject ballTarget;
+
+    public Rigidbody ballRigidbody;
 
     public Image[] arrows;
-    private GameObject player;
+    public Transform[] arrowsPositions;
 
-    // Hand variables
+    private GameObject player;
+    private BallManager ballManager;
+
+    // Holding in hand variables
     private GameObject hand;
     private bool heldInHand = false;
 
-    // Controller variables
-    private Valve.VR.EVRButtonId trigger = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
-
-
-    // Use this for initialization
     void Start () {
-
-        rigid = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
-
-        LookAtTarget();
-        LaunchBall();
+        ballManager = GameObject.FindGameObjectWithTag("BallManager").GetComponent<BallManager>();
     }
 
-    // Make ball face to target
-    private void LookAtTarget()
+    public void LookAtTarget()
     {
-        Vector3 direction = target.transform.position - transform.position;
-
+        Vector3 direction = ballTarget.transform.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         Quaternion lookAt = Quaternion.RotateTowards(transform.rotation, targetRotation, 360f);
         transform.rotation = lookAt;
     }
 
-    private void LaunchBall()
+    // Launch ball at distant target
+    public void LaunchBall()
     {
-        Vector3 p = target.transform.position;
+        Vector3 p = ballTarget.transform.position;
 
         float gravity = Physics.gravity.magnitude;
         // Selected angle in radians
@@ -67,28 +61,48 @@ public class BallShooter : MonoBehaviour {
         float angleBetweenObjects = Vector3.Angle(Vector3.forward, planarTarget - planarPostion);
         Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, Vector3.up) * velocity;
 
+        foreach (Image image in arrows)
+        {
+            image.enabled = true;
+        }
+
         // Fire!
-        rigid.velocity = finalVelocity;
-        rigid.AddTorque(transform.forward * 20, ForceMode.VelocityChange);
+        ballRigidbody.useGravity = true;
+        ballRigidbody.velocity = finalVelocity;
+        ballRigidbody.AddTorque(transform.forward * 20, ForceMode.VelocityChange);
     }
 
+
+    // HOLDING BALL METHODS
 
     // When player catches ball, stop its velocity and torque,
     // disable its gravity and attach to hand
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "hand_right")
+        if(other.gameObject.name == "hand_right" || other.gameObject.name == "Controller (right)")
         {
-            rigid.useGravity = false;
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
-
-            gameObject.transform.SetParent(other.transform);
+            ballRigidbody.useGravity = false;
+            ballRigidbody.velocity = Vector3.zero;
+            ballRigidbody.angularVelocity = Vector3.zero;
 
             heldInHand = true;
             hand = other.gameObject;
+            ballManager.ballScore++;
+
+             foreach(Image image in arrows)
+            {
+                image.enabled = false;
+            }
         }
     }
+
+
+
+    // TOSSING BALL FROM PLAYER HAND METHODS
+    //
+    //
+    //
+    //
 
     private void Update()
     {
@@ -96,16 +110,16 @@ public class BallShooter : MonoBehaviour {
         {
             transform.position = hand.transform.position;
             transform.rotation = hand.transform.rotation;
-        } else
-        {
-            Vector3 lookVector = player.transform.position - transform.position;
-            lookVector.x = lookVector.z = 0.0f;
-            foreach(Image image in arrows)
+            foreach (Image image in arrows)
             {
-                image.transform.LookAt(player.transform.position - lookVector);
-                image.transform.Rotate(0, 180, 0);
+                image.enabled = false;
             }
         }
+    }
+
+    public void SetHoldingValue (bool value)
+    {
+        heldInHand = value;
     }
 
 }
