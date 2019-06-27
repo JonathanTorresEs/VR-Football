@@ -81,7 +81,8 @@ public class BallShooter : MonoBehaviour {
     // disable its gravity and attach to hand
     private void OnTriggerEnter(Collider other)
     {
-        if((other.gameObject.name == "hand_right" || other.gameObject.name == "Controller (right)") && !missedShot)
+        if((other.gameObject.name == "hand_right" || other.gameObject.name == "hand_right" || 
+            other.gameObject.name == "hand_left") && !missedShot && !scoreOnce)
         {
             ballRigidbody.useGravity = false;
             ballRigidbody.velocity = Vector3.zero;
@@ -90,11 +91,8 @@ public class BallShooter : MonoBehaviour {
             heldInHand = true;
             hand = other.gameObject;
 
-            if(!scoreOnce)
-            {
-                ballManager.ballScore++;
-                scoreOnce = true;
-            }
+            ballManager.ballScore += 10;
+            scoreOnce = true;
 
             foreach (Image image in arrows)
             {

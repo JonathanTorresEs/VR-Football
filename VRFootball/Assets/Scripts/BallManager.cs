@@ -12,7 +12,7 @@ public class BallManager : MonoBehaviour {
     public int ballScore = 0;
 
     // Ball variables
-    private int ballsRemaining = 10;
+    public int ballsRemaining = 10;
     private BallShooter ballShooter;
     private BallTarget chosenTarget;
 
@@ -60,7 +60,7 @@ public class BallManager : MonoBehaviour {
 
     private void ChooseRandomTarget()
     {
-        chosenTarget = ballTargets[Random.Range(0, 4)];
+        chosenTarget = ballTargets[Random.Range(0, 3)];
         ballShooter.ballTarget = chosenTarget.gameObject;
     }
 }
