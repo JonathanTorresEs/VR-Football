@@ -24,6 +24,8 @@ public class BallShooter : MonoBehaviour {
     private GameObject hand;
     private bool heldInHand = false;
 
+    public SerialManager serialManager;
+
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         ballManager = GameObject.FindGameObjectWithTag("BallManager").GetComponent<BallManager>();
@@ -97,6 +99,11 @@ public class BallShooter : MonoBehaviour {
             foreach (Image image in arrows)
             {
                 image.enabled = false;
+            }
+
+            if(serialManager.playWithSerial)
+            {
+                serialManager.ActivateVRVest();
             }
         }
 
