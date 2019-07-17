@@ -86,6 +86,11 @@ public class BallShooter : MonoBehaviour {
         if((other.gameObject.name == "hand_right" || other.gameObject.name == "hand_right" || 
             other.gameObject.name == "hand_left") && !missedShot && !scoreOnce)
         {
+            if (serialManager.playWithSerial || serialManager.oculusQuestBuild)
+            {
+                serialManager.ActivateVRVest();
+            }
+
             ballRigidbody.useGravity = false;
             ballRigidbody.velocity = Vector3.zero;
             ballRigidbody.angularVelocity = Vector3.zero;
@@ -99,11 +104,6 @@ public class BallShooter : MonoBehaviour {
             foreach (Image image in arrows)
             {
                 image.enabled = false;
-            }
-
-            if(serialManager.playWithSerial)
-            {
-                serialManager.ActivateVRVest();
             }
         }
 

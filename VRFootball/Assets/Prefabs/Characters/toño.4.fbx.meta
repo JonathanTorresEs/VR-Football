@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: aed7868aaec4f9d409b263d1380ab6ba
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature.000
+    100002: Armature.001
+    100004: base
+    100006: base 1
+    100008: bIndex
+    100010: bIndex 1
+    100012: bMiddle
+    100014: bMiddle 1
+    100016: bTiny
+    100018: bTiny 1
+    100020: Camera
+    100022: Cylinder.000
+    100024: Cylinder.001
+    100026: Cylinder.002
+    100028: mIndex
+    100030: mIndex 1
+    100032: mMiddle
+    100034: mMiddle 1
+    100036: mThumb
+    100038: mThumb 1
+    100040: mTiny
+    100042: mTiny 1
+    100044: pIndex
+    100046: pIndex 1
+    100048: pMiddle
+    100050: pMiddle 1
+    100052: pThumb
+    100054: pThumb 1
+    100056: pTiny
+    100058: pTiny 1
+    100060: tIndex
+    100062: tIndex 1
+    100064: tIndex_end
+    100066: tIndex_end 1
+    100068: tMiddle
+    100070: tMiddle 1
+    100072: tMiddle_end
+    100074: tMiddle_end 1
+    100076: //RootNode
+    100078: tThumb
+    100080: tThumb 1
+    100082: tThumb_end
+    100084: tThumb_end 1
+    100086: tTiny
+    100088: tTiny 1
+    100090: tTiny_end
+    100092: tTiny_end 1
+    400000: Armature.000
+    400002: Armature.001
+    400004: base
+    400006: base 1
+    400008: bIndex
+    400010: bIndex 1
+    400012: bMiddle
+    400014: bMiddle 1
+    400016: bTiny
+    400018: bTiny 1
+    400020: Camera
+    400022: Cylinder.000
+    400024: Cylinder.001
+    400026: Cylinder.002
+    400028: mIndex
+    400030: mIndex 1
+    400032: mMiddle
+    400034: mMiddle 1
+    400036: mThumb
+    400038: mThumb 1
+    400040: mTiny
+    400042: mTiny 1
+    400044: pIndex
+    400046: pIndex 1
+    400048: pMiddle
+    400050: pMiddle 1
+    400052: pThumb
+    400054: pThumb 1
+    400056: pTiny
+    400058: pTiny 1
+    400060: tIndex
+    400062: tIndex 1
+    400064: tIndex_end
+    400066: tIndex_end 1
+    400068: tMiddle
+    400070: tMiddle 1
+    400072: tMiddle_end
+    400074: tMiddle_end 1
+    400076: //RootNode
+    400078: tThumb
+    400080: tThumb 1
+    400082: tThumb_end
+    400084: tThumb_end 1
+    400086: tTiny
+    400088: tTiny 1
+    400090: tTiny_end
+    400092: tTiny_end 1
+    2000000: Camera
+    2100000: NARANJA
+    2300000: Cylinder.000
+    3300000: Cylinder.000
+    4300000: Cylinder.001
+    4300002: Cylinder.000
+    4300004: Cylinder.002
+    7400000: Armature.000|Armature.000Action
+    7400002: Armature.000|Armature.000Action.001
+    7400004: Armature.000|Armature.000Action.002
+    7400006: Armature.001|Armature.000Action
+    7400008: Armature.001|Armature.000Action.001
+    7400010: Armature.001|Armature.000Action.002
+    9500000: //RootNode
+    13700000: Cylinder.001
+    13700002: Cylinder.002
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
