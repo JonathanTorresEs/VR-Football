@@ -58,7 +58,7 @@ ModelImporter:
     4300002: mano
     7400000: closeHand
     7400002: animMano|Armature.000Action.002
-    7400004: animMano|cierre
+    7400004: idle_tiger_hand
     7400006: mano|cierre
     9500000: //RootNode
     13700000: Cylinder.001
@@ -146,7 +146,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: animMano|cierre
+      name: idle_tiger_hand
       takeName: animMano|cierre
       firstFrame: 0
       lastFrame: 1
