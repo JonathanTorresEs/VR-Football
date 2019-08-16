@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.49622828, g: 0.8082888, b: 1.0702065, a: 1}
+  m_IndirectSpecularColor: {r: 0.21285759, g: 0.60401845, b: 1.1242573, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -995,7 +995,7 @@ Transform:
   m_GameObject: {fileID: 429090515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.957, y: -0.07, z: -4.498}
-  m_LocalScale: {x: 3, y: 0.25, z: 3}
+  m_LocalScale: {x: 14.152056, y: 0.25, z: 7.850026}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 484995061}
   - component: {fileID: 484995060}
   - component: {fileID: 484995062}
+  - component: {fileID: 484995063}
   m_Layer: 0
   m_Name: BallManager
   m_TagString: BallManager
@@ -1064,9 +1065,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comPort: COM3
   oculusQuestBuild: 0
-  playWithSerial: 1
+  playWithSerial: 0
   debugText: {fileID: 1640523075}
   ipAddress: 192.168.0.20:8000
+--- !u!114 &484995063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 484995059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dd3d0983ac00d409c24f33d5f284e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdingRightTrigger: 0
+  holdingLeftTrigger: 0
 --- !u!1 &508327975
 GameObject:
   m_ObjectHideFlags: 0
