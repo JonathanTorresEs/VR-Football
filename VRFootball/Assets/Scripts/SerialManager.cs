@@ -26,6 +26,15 @@ public class SerialManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+
+        try {
+            GameObject ipObject = GameObject.Find("IP Address");
+            ipAddress = ipObject.GetComponent<Text>().text;
+            Debug.Log("IP Object found with IP Address: " + ipAddress);
+        } catch (System.Exception e) {
+            Debug.Log("IP Object was not found: " + e);
+        }
+
         if (oculusQuestBuild)
         {
             try

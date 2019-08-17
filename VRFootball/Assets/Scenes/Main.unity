@@ -1945,6 +1945,13 @@ MonoBehaviour:
   MaxFade: 1
   FadeMinDistance: 0.25
   FadeMaxDistance: 0.35
+--- !u!81 &902758676
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902758674}
+  m_Enabled: 1
 --- !u!1 &1002581193
 GameObject:
   m_ObjectHideFlags: 0
