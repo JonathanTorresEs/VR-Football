@@ -29,11 +29,16 @@ public class IPManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		controllerLine.SetPosition(0, transform.position);
-		shootRay.origin = transform.position;
-		shootRay.direction = transform.forward;
+		controllerLine.SetPosition(0, controller.transform.position);
+		shootRay.origin = controller.transform.position;
+		shootRay.direction = controller.transform.forward;
 
-		if(Physics.Raycast(shootRay, out shootHit, 400.0f, shootableMask)) {
+		if (OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f)
+			Debug.Log("Pressing any trigger");
+
+
+		if(Physics.Raycast(shootRay, out shootHit, 1000.0f, shootableMask)) {
+			Debug.Log(shootHit.collider.name);
 			if (OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f || 
 			OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) > .1f) {
 
@@ -74,13 +79,17 @@ public class IPManager : MonoBehaviour {
 							addNumberToQuartet("0"); break;
 						}
 				}
-			}
-		}
 
+			controllerLine.SetPosition(1, shootHit.point);
+			} 
+		} else {
+				controllerLine.SetPosition(1, shootRay.origin + shootRay.direction * 400.0f);
+			}
 	}
 
 	private void addNumberToQuartet(string number) {
 		quartets[currentIndex] = quartets[currentIndex] + number;
+		Debug.Log(number + " added");
 	}
 
 	private void clearQuartet() {
