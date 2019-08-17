@@ -11,38 +11,56 @@ public class IPManager : MonoBehaviour {
 	[Header("IP Address")]
 	public string ipAddress = "";
 	
-	// Controller Variables
+	// Controller and Line Variables
 	public GameObject controller;
 	private LineRenderer controllerLine;
 	private Ray shootRay = new Ray();
     private RaycastHit shootHit;
+	private Material defaultMaterial;
+	private Material selectMaterial;
     private int shootableMask;
+	private float range = 20.0f;
+
+	// Event variables
+	private float timer = 0.0f;
+	private float timeBetweenEvents = 0.75f;
 
 
 	// Use this for initialization
 	void Start () {
 		quartets = new string[4];
+
+		for (int i = 0; i < 4; i++) {
+			quartets[i] = "";
+		}
+
 		controllerLine = controller.GetComponent<LineRenderer>();
 		controllerLine.enabled = true;
-		shootableMask = 0;
+		shootableMask = 5;
+		defaultMaterial = Resources.Load("line_default", typeof(Material)) as Material;
+		selectMaterial = Resources.Load("line_select", typeof(Material)) as Material;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		timer += Time.deltaTime;
+
 		controllerLine.SetPosition(0, controller.transform.position);
 		shootRay.origin = controller.transform.position;
 		shootRay.direction = controller.transform.forward;
 
-		if (OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f)
-			Debug.Log("Pressing any trigger");
+		bool anyTriggerPressed = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f || OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) > .1f ? true : false;
 
+		if(anyTriggerPressed)
+			controllerLine.material = selectMaterial;
+		else
+			controllerLine.material = defaultMaterial;
 
-		if(Physics.Raycast(shootRay, out shootHit, 1000.0f, shootableMask)) {
-			Debug.Log(shootHit.collider.name);
-			if (OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f || 
-			OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) > .1f) {
-
+		if(Physics.Raycast(shootRay, out shootHit, range, shootableMask) && anyTriggerPressed && timer > timeBetweenEvents) {
 				checkQuartetLength();
+				Debug.Log(shootHit.collider.name);
+				timer = 0.0f;
 
 				if (shootHit.collider.tag == "Event") {
 					switch (shootHit.collider.name) {
@@ -79,17 +97,17 @@ public class IPManager : MonoBehaviour {
 							addNumberToQuartet("0"); break;
 						}
 				}
-
 			controllerLine.SetPosition(1, shootHit.point);
-			} 
 		} else {
-				controllerLine.SetPosition(1, shootRay.origin + shootRay.direction * 400.0f);
+				controllerLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
 			}
 	}
 
 	private void addNumberToQuartet(string number) {
-		quartets[currentIndex] = quartets[currentIndex] + number;
-		Debug.Log(number + " added");
+		if(quartets[currentIndex].Length < 3) {
+			quartets[currentIndex] = quartets[currentIndex] + number;
+			Debug.Log(quartets[currentIndex] + " current quartet ------ " + currentIndex + " -- current index");
+		}
 	}
 
 	private void clearQuartet() {
@@ -110,7 +128,7 @@ public class IPManager : MonoBehaviour {
 			currentIndex = 3;
 	}
 	private void checkQuartetLength() {
-		if (quartets[currentIndex].Length >= 3 || currentIndex < 3)
+		if (quartets[currentIndex].Length >= 3)
 		{
 			advanceCurrentIndex();
 		}
