@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IPManager : MonoBehaviour {
 
@@ -10,6 +12,7 @@ public class IPManager : MonoBehaviour {
 
 	[Header("IP Address")]
 	public string ipAddress = "";
+	public GameObject ipObject;
 	
 	// Controller and Line Variables
 	public GameObject controller;
@@ -23,10 +26,13 @@ public class IPManager : MonoBehaviour {
 
 	// Event variables
 	private float timer = 0.0f;
-	private float timeBetweenEvents = 0.75f;
+	private float timeBetweenEvents = 0.3f;
 
+	// UI variables
+	[Header("UI Variables")]
+	public Text[] quartetText;
+	public Image[] selectors;
 
-	// Use this for initialization
 	void Start () {
 		quartets = new string[4];
 
@@ -39,9 +45,9 @@ public class IPManager : MonoBehaviour {
 		shootableMask = 5;
 		defaultMaterial = Resources.Load("line_default", typeof(Material)) as Material;
 		selectMaterial = Resources.Load("line_select", typeof(Material)) as Material;
+		displayCurrentSelector();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 		timer += Time.deltaTime;
@@ -50,7 +56,8 @@ public class IPManager : MonoBehaviour {
 		shootRay.origin = controller.transform.position;
 		shootRay.direction = controller.transform.forward;
 
-		bool anyTriggerPressed = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f || OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) > .1f ? true : false;
+		//bool anyTriggerPressed = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f || OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) > .1f ? true : false;
+		bool anyTriggerPressed = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f ? true : false;
 
 		if(anyTriggerPressed)
 			controllerLine.material = selectMaterial;
@@ -58,20 +65,22 @@ public class IPManager : MonoBehaviour {
 			controllerLine.material = defaultMaterial;
 
 		if(Physics.Raycast(shootRay, out shootHit, range, shootableMask) && anyTriggerPressed && timer > timeBetweenEvents) {
-				checkQuartetLength();
-				Debug.Log(shootHit.collider.name);
 				timer = 0.0f;
 
 				if (shootHit.collider.tag == "Event") {
 					switch (shootHit.collider.name) {
 						case "Clear":
-							clearQuartet(); break;
+							clearAllQuartets(); break;
 						case "Next":
 							advanceCurrentIndex(); break;
 						case "Back": 
 							decreaseCurrentIndex(); break;
+						case "Backspace": 
+							backspace(); break;
 						case "Enter":
 							saveIpAddress(); break;
+						case "Play":
+							loadMainGame(); break;
 					}
 				} else {
 					switch (shootHit.collider.name) {
@@ -103,15 +112,33 @@ public class IPManager : MonoBehaviour {
 			}
 	}
 
+	//
+	//	DATA QUARTETS METHODS
+	//
+
 	private void addNumberToQuartet(string number) {
+		checkQuartetLength();
 		if(quartets[currentIndex].Length < 3) {
 			quartets[currentIndex] = quartets[currentIndex] + number;
-			Debug.Log(quartets[currentIndex] + " current quartet ------ " + currentIndex + " -- current index");
+		}
+		updateSingleQuartet(quartets[currentIndex]);
+	}
+
+	private void backspace() {
+		if(quartets[currentIndex].Length > 0) {
+			quartets[currentIndex] = quartets[currentIndex].Remove(quartets[currentIndex].Length - 1);
+			updateSingleQuartet(quartets[currentIndex]);
 		}
 	}
 
-	private void clearQuartet() {
-		quartets[currentIndex] = "";
+	private void clearAllQuartets() {
+		ipAddress = "";
+		for (int i = 0; i < 4; i++) {
+			quartets[i] = "";
+		}
+		currentIndex = 0;
+		clearAllQuartetText();
+		displayCurrentSelector();
 	}
 
 	private void advanceCurrentIndex() {
@@ -119,6 +146,8 @@ public class IPManager : MonoBehaviour {
 			currentIndex++;
 		else
 			currentIndex = 0;
+
+			displayCurrentSelector();
 	}
 
 	private void decreaseCurrentIndex() {
@@ -126,6 +155,8 @@ public class IPManager : MonoBehaviour {
 			currentIndex--;
 		else
 			currentIndex = 3;
+	
+			displayCurrentSelector();
 	}
 	private void checkQuartetLength() {
 		if (quartets[currentIndex].Length >= 3)
@@ -135,11 +166,44 @@ public class IPManager : MonoBehaviour {
 	}
 
 	private void saveIpAddress() {
-		for(int i = 0; i < ipAddress.Length; i++) {
+
+		ipAddress = "";
+
+		for(int i = 0; i < quartets.Length; i++) {
 			if (quartets[i] == "")
 				quartets[i] = "0";
 		}
 		ipAddress = quartets[0] + '.' + quartets[1] + '.' + quartets[2] + '.' + quartets[3];
+	}
+
+	//
+	//	DISPLAY DATA METHODS
+	//
+
+	private void updateSingleQuartet(string quartet) {
+		quartetText[currentIndex].text = quartet;
+	}
+
+	private void displayCurrentSelector() {
+
+		for(int i = 0; i < selectors.Length; i++) {
+			selectors[i].enabled = false;
+		}
+
+		selectors[currentIndex].enabled = true;
+	}
+
+	private void clearAllQuartetText() {
+		for(int i = 0; i < quartetText.Length; i++) {
+			quartetText[i].text = "";
+		}
+	}
+
+	private void loadMainGame() {
+		Text ipObjectText = ipObject.GetComponent<Text>();
+		ipObjectText.text = ipAddress;
+		DontDestroyOnLoad(ipObject);
+		SceneManager.LoadScene("Main");
 	}
 
 }

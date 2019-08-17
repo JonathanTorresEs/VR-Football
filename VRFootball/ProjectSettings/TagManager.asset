@@ -7,6 +7,7 @@ TagManager:
   - BallManager
   - BallTarget
   - Controllers
+  - Event
   layers:
   - Default
   - TransparentFX
