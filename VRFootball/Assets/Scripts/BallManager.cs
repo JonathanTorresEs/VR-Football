@@ -40,7 +40,7 @@ public class BallManager : MonoBehaviour {
             ballShooter.LaunchBall();
             chosenTarget.StartFlashingArrows();
             ballsRemaining--;
-            yield return new WaitForSeconds(8f);
+            yield return new WaitForSeconds(15f);
             chosenTarget.StopFlashingArrows();
             ResetBall();
         }
@@ -56,6 +56,7 @@ public class BallManager : MonoBehaviour {
         ballShooter.missedShot = false;
         ballShooter.scoreOnce = false;
         ball.gameObject.SetActive(false);
+        ballShooter.isthrowing = false;
     }
 
     private void ChooseRandomTarget()
