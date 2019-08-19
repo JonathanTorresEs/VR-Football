@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallManager : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class BallManager : MonoBehaviour {
     public int ballsRemaining = 10;
     private BallShooter ballShooter;
     private BallTarget chosenTarget;
+    public int anotados = 0;
 
     // Use this for initialization
     void Start () {
@@ -43,6 +45,10 @@ public class BallManager : MonoBehaviour {
             yield return new WaitForSeconds(15f);
             chosenTarget.StopFlashingArrows();
             ResetBall();
+        }
+         while (ballsRemaining >= 0)
+        {
+            
         }
     }
 

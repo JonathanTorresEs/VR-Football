@@ -8,7 +8,6 @@ public class BallShooter : MonoBehaviour
 {
 
 // Launch at target variables
-    public OVRInput.Controller controller;
     public float initialAngle = 0.0f;
     public GameObject ballTarget;
     public bool missedShot = false;
@@ -30,6 +29,7 @@ public class BallShooter : MonoBehaviour
     public bool isthrowing = false;
     public bool grabR = false;
     public bool grabL = false;
+    public bool prueba = true;
     float TimeBetweenInput = 2.0f;
     float timer = 0.0f;
     Vector3 PrevPos; 
@@ -57,6 +57,7 @@ public void LookAtTarget()
 // Launch ball at distant target
 public void LaunchBall()
 {
+    prueba = true;
     Vector3 p = ballTarget.transform.position;
 
     float gravity = Physics.gravity.magnitude;
@@ -111,6 +112,7 @@ private void OnTriggerEnter(Collider other)
         ballRigidbody.angularVelocity = Vector3.zero;
 
         heldInHand = true;
+        Debug.Log("jala");
         hand = other.gameObject;
         handRigidbody = hand.GetComponent<Rigidbody>();
 
@@ -161,14 +163,11 @@ private void Update()
     grabR = controllers.holdingRightTrigger;
     grabL = controllers.holdingLeftTrigger;
 
-    //Debug.Log(handRigidbody.velocity);
-    Debug.Log(handRigidbody.transform.position);
-
     if(heldInHand && !isthrowing)
     {
         bool triggerIsPressed = DetermineHandTrigger();
 
-    if (triggerIsPressed) 
+    if (triggerIsPressed && prueba) 
     {
         transform.position = hand.transform.position;
         transform.rotation = hand.transform.rotation;
@@ -176,14 +175,15 @@ private void Update()
         {
             image.enabled = false;
         }
-    } else if (timer > TimeBetweenInput)
+    } else if (timer > TimeBetweenInput && !isthrowing)
     {
         isthrowing = true;
+        prueba = false;
         ballRigidbody.isKinematic = false;
         ballRigidbody.useGravity = true;
-        ballRigidbody.velocity = ObjVelocity*4;
-        //ballRigidbody.angularVelocity = HandVector;
-        isthrowing = false;
+        ballRigidbody.velocity = ObjVelocity * 8;
+        Debug.Log(ObjVelocity.magnitude * 8);
+       
         timer = 0.0f;
     }
 //new Vector3(-15, 3, 0);

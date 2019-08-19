@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour {
     public BallManager ballManager;
     public Text scoreText;
     public Text remainingShotsText;
+    public Text tirosAnotadosText;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +31,7 @@ public class ScoreManager : MonoBehaviour {
 
         scoreText.text = ballManager.ballScore.ToString();
         remainingShotsText.text = ballManager.ballsRemaining.ToString();
+        tirosAnotadosText.text = ballManager.anotados.ToString();
 
     }
 }
