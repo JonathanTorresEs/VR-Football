@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BallShooter : MonoBehaviour {
 
     // Launch at target variables
+    public OVRInput.Controller controller;
     public float initialAngle = 0.0f;
     public GameObject ballTarget;
     public bool missedShot = false;
@@ -23,6 +24,9 @@ public class BallShooter : MonoBehaviour {
     // Holding in hand variables
     private GameObject hand;
     private bool heldInHand = false;
+    public bool isthrowing = false;
+    public bool grabR = false;
+    public bool grabL = false;
 
     public SerialManager serialManager;
 
@@ -84,7 +88,7 @@ public class BallShooter : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if((other.gameObject.name == "hand_right" || other.gameObject.name == "hand_right" || 
-            other.gameObject.name == "hand_left") && !missedShot && !scoreOnce)
+            other.gameObject.name == "hand_left") && !missedShot && !scoreOnce && (grabR || grabL))
         {
             if (serialManager.playWithSerial || serialManager.oculusQuestBuild)
             {
@@ -118,6 +122,31 @@ public class BallShooter : MonoBehaviour {
         
     }
 
+    private void Lanzamiento()
+    {
+    
+    if(heldInHand) {
+        switch(hand.name) {
+                case "hand_left": 
+            if (!grabL) {
+                isthrowing = true;
+                ballRigidbody.isKinematic = false;
+                ballRigidbody.velocity = OVRInput.GetLocalControllerVelocity(controller);
+                ballRigidbody.angularVelocity = OVRInput.GetLocalControllerAngularVelocity(controller);
+            }
+            break;
+                case "hand_right": 
+            if (!grabR) {
+                isthrowing = true;
+                ballRigidbody.isKinematic = false;
+                ballRigidbody.velocity = OVRInput.GetLocalControllerVelocity(controller);
+                ballRigidbody.angularVelocity = OVRInput.GetLocalControllerAngularVelocity(controller);
+            }
+            break;
+        }
+    }
+}
+
 
 
     // TOSSING BALL FROM PLAYER HAND METHODS
@@ -128,7 +157,7 @@ public class BallShooter : MonoBehaviour {
 
     private void Update()
     {
-        if(heldInHand)
+        if(heldInHand && !isthrowing)
         {
             transform.position = hand.transform.position;
             transform.rotation = hand.transform.rotation;
@@ -136,6 +165,24 @@ public class BallShooter : MonoBehaviour {
             {
                 image.enabled = false;
             }
+        }
+
+        if (OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) > .1f)
+        {
+            grabR = true;
+        }
+        else
+        {
+            grabR = false;
+        }
+
+        if (OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) > .1f)
+        {
+            grabL = true;
+        }
+        else
+        {
+            grabL = false;
         }
     }
 

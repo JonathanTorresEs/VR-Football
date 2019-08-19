@@ -995,7 +995,7 @@ Transform:
   m_GameObject: {fileID: 429090515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.957, y: -0.07, z: -4.498}
-  m_LocalScale: {x: 3, y: 0.25, z: 3}
+  m_LocalScale: {x: 14.152056, y: 0.25, z: 7.850026}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 484995061}
   - component: {fileID: 484995060}
   - component: {fileID: 484995062}
+  - component: {fileID: 484995063}
   m_Layer: 0
   m_Name: BallManager
   m_TagString: BallManager
@@ -1064,9 +1065,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comPort: COM3
   oculusQuestBuild: 0
-  playWithSerial: 1
+  playWithSerial: 0
   debugText: {fileID: 1640523075}
   ipAddress: 192.168.0.20:8000
+--- !u!114 &484995063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 484995059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dd3d0983ac00d409c24f33d5f284e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdingRightTrigger: 0
+  holdingLeftTrigger: 0
 --- !u!1 &508327975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,26 +1940,7 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 2}
   m_PrefabInternal: {fileID: 419800733}
---- !u!114 &902758675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 902758674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf162022e230bb745ab2ec48cd357f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraRig: {fileID: 1412208459}
-  CurrentDistance: 0
-  EnableFadeout: 0
-  EnableCollision: 0
-  DynamicHeight: 0
-  MaxFade: 1
-  FadeMinDistance: 0.25
-  FadeMaxDistance: 0.35
---- !u!81 &902758676
+--- !u!81 &902758680
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2045,8 +2040,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.25
+  m_Color: {r: 1, g: 0.8500717, b: 0.44117647, a: 1}
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2637,12 +2632,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &1412208459 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11400020, guid: ce816f2e6abb0504092c23ed9b970dfd,
-    type: 2}
-  m_PrefabInternal: {fileID: 419800733}
-  m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
 --- !u!1001 &1443283436
 Prefab:
   m_ObjectHideFlags: 0
