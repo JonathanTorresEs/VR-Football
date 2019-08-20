@@ -102,7 +102,7 @@ private void OnTriggerEnter(Collider other)
     if((other.gameObject.name == "hand_right" || other.gameObject.name == "hand_right" || 
         other.gameObject.name == "hand_left") && !missedShot && !scoreOnce && (grabR || grabL))
     {
-        if (serialManager.playWithSerial || serialManager.oculusQuestBuild)
+        if (serialManager.playWithSerial)
         {
             serialManager.ActivateVRVest();
         }

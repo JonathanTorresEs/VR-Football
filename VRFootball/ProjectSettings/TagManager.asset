@@ -9,6 +9,7 @@ TagManager:
   - Controllers
   - Event
   - Ball
+  - Reset
   layers:
   - Default
   - TransparentFX

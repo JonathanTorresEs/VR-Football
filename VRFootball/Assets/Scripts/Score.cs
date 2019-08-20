@@ -19,9 +19,9 @@ public class Score : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if(other.collider.tag == Ball)
+		if(other.tag == "Ball")
 		{
-			ballManager.anotados += 5;
+			ballManager.anotados += 1;
 		}
 	
 	}

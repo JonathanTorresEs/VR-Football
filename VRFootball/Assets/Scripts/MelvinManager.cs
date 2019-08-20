@@ -21,4 +21,9 @@ public class MelvinManager : MonoBehaviour {
         animator.SetTrigger("Throwing");
     }
 
+	public void ResetMelvin()
+    {
+        animator.SetTrigger("Idle");
+    }
+
 }

@@ -29,7 +29,14 @@ public class BallManager : MonoBehaviour {
 		
 	}
 
-    IEnumerator LaunchCoroutine()
+    public void corut()
+    {
+        StopCoroutine(LaunchCoroutine());
+        StartCoroutine(LaunchCoroutine());
+    }
+
+
+    public IEnumerator LaunchCoroutine()
     {
         while (ballsRemaining > 0)
         {
@@ -42,17 +49,13 @@ public class BallManager : MonoBehaviour {
             ballShooter.LaunchBall();
             chosenTarget.StartFlashingArrows();
             ballsRemaining--;
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(10.0f);
             chosenTarget.StopFlashingArrows();
             ResetBall();
         }
-         while (ballsRemaining >= 0)
-        {
-            
-        }
     }
 
-    private void ResetBall()
+    public void ResetBall()
     {
         fakeBall.SetActive(true);
         ball.transform.SetPositionAndRotation(initialBallPosition.transform.position, initialBallPosition.rotation);
