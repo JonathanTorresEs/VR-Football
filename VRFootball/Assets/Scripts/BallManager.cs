@@ -7,7 +7,7 @@ public class BallManager : MonoBehaviour {
 
     public GameObject fakeBall;
     public MelvinManager melvin;
-    public GameObject ball;
+    public GameObject bolafresa;
     public Transform initialBallPosition;
     public BallTarget[] ballTargets;
     public int ballScore = 0;
@@ -20,7 +20,7 @@ public class BallManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        ballShooter = ball.GetComponent<BallShooter>();
+        ballShooter = bolafresa.GetComponent<BallShooter>();
         StartCoroutine(LaunchCoroutine());
     }
 
@@ -44,7 +44,7 @@ public class BallManager : MonoBehaviour {
             melvin.StartBallThrowAnimation();
             yield return new WaitForSeconds(5.4f);
             fakeBall.SetActive(false);
-            ball.gameObject.SetActive(true);
+            bolafresa.gameObject.SetActive(true);
             ballShooter.LookAtTarget();
             ballShooter.LaunchBall();
             chosenTarget.StartFlashingArrows();
@@ -58,13 +58,13 @@ public class BallManager : MonoBehaviour {
     public void ResetBall()
     {
         fakeBall.SetActive(true);
-        ball.transform.SetPositionAndRotation(initialBallPosition.transform.position, initialBallPosition.rotation);
-        Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
+        bolafresa.transform.SetPositionAndRotation(initialBallPosition.transform.position, initialBallPosition.rotation);
+        Rigidbody ballRigidbody = bolafresa.GetComponent<Rigidbody>();
         ballRigidbody.useGravity = false;
         ballShooter.SetHoldingValue(false);
         ballShooter.missedShot = false;
         ballShooter.scoreOnce = false;
-        ball.gameObject.SetActive(false);
+        bolafresa.gameObject.SetActive(false);
         ballShooter.isthrowing = false;
     }
 

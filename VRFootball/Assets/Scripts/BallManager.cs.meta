@@ -3,7 +3,11 @@ guid: 08b0d4fe38cf3484ebe3ccb59e6896bb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fakeBall: {instanceID: 0}
+  - melvin: {instanceID: 0}
+  - bolafresa: {fileID: 100000, guid: be1297bb050b98549b93ab203418d134, type: 3}
+  - initialBallPosition: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
