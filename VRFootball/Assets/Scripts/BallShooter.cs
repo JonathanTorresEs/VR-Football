@@ -14,7 +14,8 @@ public class BallShooter : MonoBehaviour
     public bool scoreOnce = false;
 
     public Rigidbody ballRigidbody;
-    private Rigidbody handRigidbody;
+    //private Rigidbody handRigidbody;
+    private Rigidbody originRigidbody;
 
     public Image[] arrows;
     public Transform[] arrowsPositions;
@@ -24,11 +25,12 @@ public class BallShooter : MonoBehaviour
     private OVRControllerInputs controllers;
 
 // Holding in hand variables
-    private GameObject hand;
+    //private GameObject hand;
+    private GameObject origen;
     private bool heldInHand = false;
     public bool isthrowing = false;
     public bool grabR = false;
-    public bool grabL = false;
+    //public bool grabL = false;
     public bool prueba = true;
     float TimeBetweenInput = 2.0f;
     float timer = 0.0f;
@@ -99,9 +101,9 @@ public void LaunchBall()
 // disable its gravity and attach to hand
 private void OnTriggerEnter(Collider other)
 {
-    if((other.gameObject.name == "hand_right" || other.gameObject.name == "hand_right" || 
-        other.gameObject.name == "hand_left") && !missedShot && !scoreOnce && (grabR || grabL))
+    if((other.gameObject.name == "cono" || other.gameObject.name == "hand_right" || other.gameObject.name == "IceCreamOrigin") && !missedShot && !scoreOnce && (grabR))
     {
+        Debug.Log("choca bola");
         if (serialManager.playWithSerial)
         {
             serialManager.ActivateVRVest();
@@ -113,8 +115,11 @@ private void OnTriggerEnter(Collider other)
 
         heldInHand = true;
         Debug.Log("jala");
-        hand = other.gameObject;
-        handRigidbody = hand.GetComponent<Rigidbody>();
+        //hand = other.gameObject;
+        origen = other.gameObject;
+        //handRigidbody = hand.GetComponent<Rigidbody>();
+        originRigidbody = origen.GetComponent<Rigidbody>();
+
 
         ballManager.ballScore += 10;
         scoreOnce = true;
@@ -138,10 +143,10 @@ private void OnTriggerEnter(Collider other)
 
 private bool DetermineHandTrigger()
 {
-    switch(hand.name) {
-            case "hand_left": 
-        return grabL;
-            case "hand_right": 
+    switch(origen.name) {
+            //case "hand_left": 
+        //return grabL;
+            case "IceCreamOrigin": 
         return grabR;
             default: 
         return false;
@@ -161,7 +166,7 @@ private void Update()
     PrevPos = NewPos;  // update position for next frame calculation
     timer += Time.deltaTime;
     grabR = controllers.holdingRightTrigger;
-    grabL = controllers.holdingLeftTrigger;
+    //grabL = controllers.holdingLeftTrigger;
 
     if(heldInHand && !isthrowing)
     {
@@ -169,8 +174,9 @@ private void Update()
 
     if (triggerIsPressed && prueba) 
     {
-        transform.position = hand.transform.position;
-        transform.rotation = hand.transform.rotation;
+        Debug.Log("funciona atrapada");
+        transform.position = origen.transform.position;
+        transform.rotation = origen.transform.rotation;
         foreach (Image image in arrows)
         {
             image.enabled = false;
