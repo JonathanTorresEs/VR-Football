@@ -18,7 +18,7 @@ public class HandDissapear : MonoBehaviour {
 			if(handRight)
 			{
 				handRight.GetComponent<SkinnedMeshRenderer>().enabled = false;
-				Destroy(GetComponent<HandDissapear>());
+				//Destroy(GetComponent<HandDissapear>());
 			}
 		
 	}
