@@ -9,9 +9,7 @@ public class OVRControllerInputs : MonoBehaviour {
    
 	// Use this for initialization
 	void Start () {
-        /* Transform pathToHandR = gameObject.transform.Find("hand_right_renderPart_0");
-        SkinnedMeshRenderer RHModel = pathToHandR.GetComponent<SkinnedMeshRenderer>();
-		RHModel.enabled = false;*/
+
 	}
 	
 	// Update is called once per frame
