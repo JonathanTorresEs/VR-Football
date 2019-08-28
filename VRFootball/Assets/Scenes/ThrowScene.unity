@@ -1125,8 +1125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffa2ad94d35bc9469a3cff77ac3fcfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comPort: COM6
-  oculusQuestBuild: 1
+  comPort: COM3
+  oculusQuestBuild: 0
   playWithSerial: 0
   debugText: {fileID: 1640523075}
   ipAddress: 192.168.0.20:8000
