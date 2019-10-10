@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ResetScript : MonoBehaviour {
 
-	public BallManager ballManager;
-	public MelvinManager melvin;
-	public ScoreManager score;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -24,7 +22,7 @@ public class ResetScript : MonoBehaviour {
 	{
 		if(other.name == "hand_right" || other.name == "hand_left")
 		{
-			SceneManager.LoadScene(1);
+			SceneManager.LoadScene(0);
 			DontDestroyOnLoad(this);
 		}
 	

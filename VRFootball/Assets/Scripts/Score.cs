@@ -22,6 +22,7 @@ public class Score : MonoBehaviour {
 		if(other.tag == "Ball")
 		{
 			ballManager.anotados += 1;
+			ballManager.ballScore += 10;
 		}
 	
 	}

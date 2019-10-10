@@ -22,6 +22,8 @@ public class BallShooter : MonoBehaviour
     private GameObject player;
     private BallManager ballManager;
     private OVRControllerInputs controllers;
+    private GameObject handR;
+    private GameObject handL;
 
 // Holding in hand variables
     private GameObject hand;
@@ -39,6 +41,10 @@ public class BallShooter : MonoBehaviour
     public SerialManager serialManager;
 
 void Start () {
+    handR = GameObject.Find("hand_right");
+    handL = GameObject.Find("hand_left");
+    handR.gameObject.AddComponent<SphereCollider>();
+    handL.gameObject.AddComponent<SphereCollider>();
     player = GameObject.FindGameObjectWithTag("Player");
     ballManager = GameObject.FindGameObjectWithTag("BallManager").GetComponent<BallManager>();
     controllers = GameObject.FindGameObjectWithTag("BallManager").GetComponent<OVRControllerInputs>();
@@ -116,7 +122,7 @@ private void OnTriggerEnter(Collider other)
         hand = other.gameObject;
         handRigidbody = hand.GetComponent<Rigidbody>();
 
-        ballManager.ballScore += 10;
+        ballManager.ballScore += 5;
         scoreOnce = true;
 
         foreach (Image image in arrows)
@@ -186,7 +192,7 @@ private void Update()
        
         timer = 0.0f;
     }
-//new Vector3(-15, 3, 0);
+//new Vector3(-15, 3, 0);*/
     
 }
   
